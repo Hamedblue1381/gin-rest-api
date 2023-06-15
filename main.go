@@ -1,17 +1,23 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
+type album struct {
+	ID     string  `json:"id"`
+	Title  string  `json:"title"`
+	Artist string  `json:"artist"`
+	Price  float64 `json:"price"`
+}
+
+var albums = []album{
+	{ID: "1", Title: "Test1", Artist: "TestSinger1", Price: 10.99},
+	{ID: "2", Title: "Test2", Artist: "TestSinger2", Price: 20.99},
+	{ID: "3", Title: "Test3", Artist: "TestSinger3", Price: 30.99},
+}
+
 func main() {
-	r := gin.New()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello World!",
-		})
-	})
-	r.Run()
+	router := gin.Default()
+	router.Run("localhost:8080")
 }
